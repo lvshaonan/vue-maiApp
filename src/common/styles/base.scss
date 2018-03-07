@@ -1,0 +1,16 @@
+
+html, body{
+    height: 100%;
+    line-height: 1;
+    font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback';
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    overflow: hidden;
+    // overflow-y: scroll;
+    font-weight: 200;
+    font-size: 14px;
+    -webkit-overflow-scrolling: touch;
+}
+::-webkit-scrollbar{
+    display: none;
+}

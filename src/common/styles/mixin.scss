@@ -1,0 +1,9 @@
+@function rem($val){
+    @return $val/75 + rem;
+}
+
+@mixin tabBg($imgSrc, $width, $height){
+    background: url($imgSrc) no-repeat;
+    background-size: rem($width) rem($height);
+}
+
