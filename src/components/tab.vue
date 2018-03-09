@@ -68,6 +68,7 @@ export default {}
                 }
             }
             &:nth-child(3){
+                z-index: 9999;
                 .add-btn{
                     display: inline-block;
                     width: rem(100);
