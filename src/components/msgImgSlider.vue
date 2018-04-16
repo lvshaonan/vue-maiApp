@@ -1,24 +1,9 @@
 <template lang="html">
     <section>
         <swiper :options="options" :not-next-tick="options.notNextTick">
-            <swiper-slide>
+            <swiper-slide v-for="(item, index) in items" :key="index">
                 <div class="msg-img-item">
-                    <img :src="sliderBanner" alt="">
-                </div>
-            </swiper-slide>
-            <swiper-slide>
-                <div class="msg-img-item">
-                    <img :src="sliderBanner" alt="">
-                </div>
-            </swiper-slide>
-            <swiper-slide>
-                <div class="msg-img-item">
-                    <img :src="sliderBanner" alt="">
-                </div>
-            </swiper-slide>
-            <swiper-slide>
-                <div class="msg-img-item">
-                    <img :src="sliderBanner" alt="">
+                    <img :src="item.src" alt="">
                 </div>
             </swiper-slide>
         </swiper>
@@ -43,14 +28,15 @@
           type: Array,
           default(){
             return [
-              {href: '', src: ''}
+              {href: '', src: require('../assets/slider_banner.jpg')},
+              {href: '', src: require('../assets/slider_banner.jpg')}
             ]
           }
         }
       },
       data(){
         return{
-            sliderBanner: require('../assets/slider_banner.jpg')
+            
         }
       },
       components: {

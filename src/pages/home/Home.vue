@@ -1,22 +1,22 @@
 <template>
   <div class="home">
         <header :class="{header: true, showBg: searchInputShow}">
-            <div class="header-left">
+            <router-link class="header-left" to="/category" tag="div">
                 <i></i>
                 <p>类目</p>
-            </div>
+            </router-link>
             <div class="header-right">
                 <i></i>
                 <p>通知</p>
             </div>
             <div class="header-center">
                 <div class="title" v-show="!searchInputShow">Mai沥青</div>
-                <div class="header-search-bar" v-show="searchInputShow">
+                <router-link tag="div" to="/search" class="header-search-bar" v-show="searchInputShow">
                     <div class="search-input">
                         <i></i>
                         请输入您要搜索的关键字
                     </div>
-                </div>
+                </router-link>
             </div>
         </header>
         <div class="scroll-wrapper">
@@ -28,13 +28,13 @@
                         @pullingUp="onPullingUp">
                 <div slot="content">
                     <div class="slider-wrapper">
-                        <Slider :items="items"/>
-                        <div class="search-bar-wrapper">
+                        <Slider :options="bannerSwiperOptions" :items="items"/>
+                        <router-link tag="div" to="/search" class="search-bar-wrapper">
                             <div class="search-bar">
                                 <i></i>
                                 请输入您要搜索的关键字
                             </div>
-                        </div>
+                        </router-link>
                     </div>
                     <nav>
                         <div class="nav-item">
@@ -58,70 +58,11 @@
                         <SliderBanner :items="sliderBanner"/>
                     </div>
                     <div class="msg-wrapper">
-                        <div class="msg-item">
-                            <div class="msg-header">
-                                <div class="avatar"></div>
-                                <div class="user-msg">
-                                    <h5>用户名<i></i></h5>
-                                    <span>3小时前</span>
-                                </div>
-                            </div>
-                            <div class="msg-img">
-                                <MsgImgSlider/>
-                            </div>
-                            <div class="msg-describe">
-                                <p class="msg-describe-text">中海油70#</p>
-                            </div>
-                            <div class="msg-comments" v-show="comments.length">
-                                <p>sacsackomasomcv</p>
-                            </div>
-                            <div class="msg-operation">
-                                <span>
-                                    <i></i>
-                                    12
-                                </span>
-                                <span>
-                                    <i></i>
-                                    12
-                                </span>
-                                <span>
-                                    <i></i>
-                                    12
-                                </span>
-                            </div>
-                        </div>
-                        <div class="msg-item">
-                            <div class="msg-header">
-                                <div class="avatar"></div>
-                                <div class="user-msg">
-                                    <h5>用户名<i></i></h5>
-                                    <span>3小时前</span>
-                                </div>
-                            </div>
-                            <div class="msg-img">
-                                <MsgImgSlider/>
-                            </div>
-                            <div class="msg-describe">
-                                <p class="msg-describe-text">中海油70#</p>
-                            </div>
-                            <div class="msg-comments" v-show="comments.length">
-                                <p>sacsackomasomcv</p>
-                            </div>
-                            <div class="msg-operation">
-                                <span>
-                                    <i></i>
-                                    12
-                                </span>
-                                <span>
-                                    <i></i>
-                                    12
-                                </span>
-                                <span>
-                                    <i></i>
-                                    12
-                                </span>
-                            </div>
-                        </div>
+                        <router-link to="/dynamic" tag="div"><DynamicPanel/></router-link>
+                        <router-link to="/dynamic" tag="div"><DynamicPanel/></router-link>
+                        <router-link tag="div" to="/social" class="to-quanzi">
+                            查看更多
+                        </router-link>
                     </div>
                 </div>
             </minirefresh>
@@ -133,6 +74,7 @@ import MiniRefresh from '../../components/minirefresh.vue';
 import Slider from '../../components/slider';
 import SliderBanner from '../../components/sliderBanner';
 import MsgImgSlider from '../../components/msgImgSlider';
+import DynamicPanel from '../../components/dynamicPanel';
 export default {
   data(){
       return{
@@ -144,17 +86,22 @@ export default {
         options: {
             container: '#minirefresh',
             down: {
-                isAuto: true
+                isAuto: false
             },
             up: {
-                isAuto: true,
+                isLock: true,
+                isAuto: false,
                 loadFull: {
-                    isEnable: true
+                    isEnable: false
                 },
                 onScroll:()=>{
                     this.$refs.minirefresh.getPosition();
                 }
             }
+        },
+        bannerSwiperOptions: {
+            autoPlay: true,
+            loop: true
         },
         items: [
             {
@@ -201,7 +148,8 @@ export default {
         minirefresh: MiniRefresh,
         Slider,
         SliderBanner,
-        MsgImgSlider
+        MsgImgSlider,
+        DynamicPanel
     },
   mounted() {
       var self = this;
@@ -223,7 +171,7 @@ export default {
   },
   watch: {
       scrollPosition(){
-          if(this.scrollPosition>300){
+          if(this.scrollPosition>150){
               this.searchInputShow = true;
           }else{
               this.searchInputShow = false;
@@ -446,7 +394,8 @@ export default {
                 }
                 .msg-operation{
                     height: rem(88);
-                    border-top: 1px solid #ccc;
+                    // border-top: 1px solid #ccc;
+                    @include border-1px('t', #ccc);
                     box-sizing: border-box;
                     display: flex;
                     justify-content: flex-end;
@@ -466,6 +415,11 @@ export default {
                         }
                     }
                 }
+            }
+            .to-quanzi{
+                height: rem(60);
+                text-align: center;
+                font-size: rem(26);
             }
         }
         

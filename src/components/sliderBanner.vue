@@ -24,73 +24,74 @@
 </template>
 
 <script>
-    import { swiper, swiperSlide } from 'vue-awesome-swiper'
-    export default{
-      props: {
-        options: {
-          type: Object,
-          default(){
-            return{
-                slidesPerView: 2.1,
-                spaceBetween: 30,
-                freeMode: true
-            }
-          }
-        },
-        items: {
-          type: Array,
-          default(){
-            return [
-              {href: '', src: ''}
-            ]
-          }
-        }
-      },
-      data(){
-        return{
-        }
-      },
-      components: {
-        swiper,
-        swiperSlide
+import { swiper, swiperSlide } from "vue-awesome-swiper";
+export default {
+  props: {
+    options: {
+      type: Object,
+      default() {
+        return {
+          slidesPerView: 2.1,
+          spaceBetween: 30,
+          freeMode: true
+        };
+      }
+    },
+    items: {
+      type: Array,
+      default() {
+        return [{ href: "", src: "" }];
       }
     }
+  },
+  data() {
+    return {};
+  },
+  components: {
+    swiper,
+    swiperSlide
+  }
+};
 </script>
 
 <style lang="scss">
 @import "../common/styles/mixin.scss";
 @import "swiper/dist/css/swiper.css";
-    .slider-banner-item{
-        float: left;
-        width: rem(350);
-        height: rem(320);
-        padding: rem(20);
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-        background: #ffffff;
-        // margin-right: rem(20);
-        h4{
-            line-height: rem(26);
-            font-size: rem(26);
-        }
-        .details{
-            width: 100%;
-            font-size: rem(20);
-            height: rem(20);
-            line-height: rem(20);
-            display: flex;
-            margin: rem(18) 0;
-            .detail-left{
-                flex: 2;
-            }
-            .detail-right{
-                flex: 1;
-            }
-        }
-        .slider-banner-img{
-            width: rem(312);
-            height: rem(198);
-            display: block;
-        }
+.slider-banner-item {
+  float: left;
+  width: rem(350);
+  height: rem(320);
+  padding: rem(20);
+  // border: 1px solid #ccc;
+  @include border-1px("", #ccc);
+  box-sizing: border-box;
+  background: #ffffff;
+  // margin-right: rem(20);
+  h4 {
+    line-height: rem(26);
+    font-size: rem(26);
+  }
+  .details {
+    width: 100%;
+    font-size: rem(20);
+    height: rem(20);
+    line-height: rem(20);
+    display: flex;
+    margin: rem(18) 0;
+    .detail-left {
+      flex: 2;
     }
+    .detail-right {
+      flex: 1;
+      span{
+        font-size: rem(16);
+      }
+    }
+  }
+  .slider-banner-img {
+    width: rem(312);
+    height: rem(198);
+    display: block;
+  }
+}
 </style>

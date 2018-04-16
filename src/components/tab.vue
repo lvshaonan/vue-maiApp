@@ -9,7 +9,8 @@
         <span>圈子</span>
       </router-link>
       <div class="tab-item">
-          <div class="add-btn"><i></i></div>
+          <div class="add-btn" @click="showMenu"><i></i></div>
+          <span>发布</span>
       </div>
       <router-link tag="div" to="/msg" class="tab-item">
         <i class="tab-icon"></i>
@@ -19,20 +20,52 @@
         <i class="tab-icon"></i>
         <span>我的</span>
       </router-link>
+      <transition name="fade">
+        <div class="menu-mask" v-show="isMenuShow" >
+            
+        </div>
+      </transition>
   </div>
 </template>
 <script>
-export default {}
+export default {
+    data(){
+        return {
+            isMenuShow: false
+        }
+    },
+    methods: {
+        showMenu(){
+            this.isMenuShow = !this.isMenuShow
+        }
+    }
+}
 </script>
 <style lang="scss" scoped>
     @import "../common/styles/mixin.scss";
+    .fade-enter, .fade-leave-to{
+        transform: translate3d(0, 100%, 0);
+    }
+    .fade-enter-active, .fade-leave-active{
+        transition: all 0.2s;
+    }
     .tab{
         height: rem(88);
-        border-top: 1px solid #ccc;
+        // border-top: 1px solid #ccc;
+        @include border-1px('t', #ccc);
         width: 100%;
         display: flex;
         box-sizing: border-box;
         padding-top: rem(8);
+        .menu-mask{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 998;
+        }
         .tab-item{
             flex: 1;
             font-size: rem(20);
@@ -68,14 +101,15 @@ export default {}
                 }
             }
             &:nth-child(3){
-                z-index: 9999;
+                z-index: 999;
                 .add-btn{
                     display: inline-block;
                     width: rem(100);
                     height: rem(100);
                     border-radius: rem(50);
                     transform: translateY(-50%);
-                    border: 1px solid #ccc;
+                    // border: 1px solid #ccc;
+                    @include border-1px('', #ccc, 25%);
                     background: #fff;
                     i{
                         display: inline-block;

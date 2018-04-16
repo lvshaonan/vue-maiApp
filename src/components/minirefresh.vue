@@ -35,7 +35,7 @@
             setTimeout(() => {
                 // 延时生成
                 this.initMiniRefresh()
-            }, 20)
+            }, 100)
         },
         methods: {
             initMiniRefresh() {
